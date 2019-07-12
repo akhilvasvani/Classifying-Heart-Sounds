@@ -22,7 +22,7 @@
 
 # Papers
 
-[Listen to Your Heart: Feature Extraction andClassification Methods for Heart Sounds](https://lindawangg.github.io/projects/classifying-heartbeats.pdf) -- use SVM with Peter Bentley Dataset
+[Listen to Your Heart: Feature Extraction and Classification Methods for Heart Sounds](https://lindawangg.github.io/projects/classifying-heartbeats.pdf) -- use SVM with Peter Bentley Dataset
 
 [Recognizing Abnormal Heart Sounds Using Deep Learning](http://ceur-ws.org/Vol-1891/paper2.pdf) -- Helpful, but nothing major
 
