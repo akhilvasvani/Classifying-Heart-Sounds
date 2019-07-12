@@ -29,3 +29,6 @@
 [Phonocardiographic Sensing using Deep Learning for Abnormal Heartbeat Detection](https://arxiv.org/pdf/1801.08322.pdf) -- Very helpful. Need to emulate this!
 
 Gotta use Mel-frequency cepstral coefficients [(MFCCs)](https://en.wikipedia.org/wiki/Mel-frequency_cepstrum)
+
+# Notes
+[Different spectrogram between audio_ops and tf.contrib.signal](https://stackoverflow.com/questions/53196156/different-spectrogram-between-audio-ops-and-tf-contrib-signal)
