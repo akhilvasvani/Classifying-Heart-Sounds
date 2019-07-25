@@ -99,6 +99,14 @@ def stdInterval(lower, low_index, upper, up_index, data):
     return np.array(std)
 
 
+def normalize(a):
+    if type(a) is np.ndarray:
+        return a / max(a)
+    else:
+        print('Error: not a numpy array')
+        return
+
+
 def freqInterval(data, lower, l_index, upper, u_index):
     freq = []
     for i in range(len(data)):

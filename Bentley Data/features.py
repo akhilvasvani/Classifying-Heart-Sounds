@@ -5,16 +5,13 @@ import numpy as np
 def find_peaks(samples, set_name):
 	"""Gets a list of peaks for each sample"""
 	if set_name.upper() == 'A':
-		interval = 200
-		r = 5
+		interval, r = 200, 5
 	else:
-		interval = 20
-		r = 2
+		interval, r = 20, 2
 	all_peaks = []
 	for sample in samples:
 		indexes = find_peaks_cwt(sample, np.arange(1, r))
 		peaks = [i for i in indexes if sample[i] > 0.15]
-
 		if len(peaks) > 1:
 			i = 1
 			start = 0

@@ -46,7 +46,6 @@ def get_setA_file_label(N):
 def get_setA_testfile(N):
 	with open('Data/set_a.csv') as csvfile:
 		reader = csv.reader(csvfile)
-		# x_testFile = [row[1][:] for row in reader if row[2] == '']
 		x_testFile = [row[1][:11] + 'Aunlabelledtest' + row[1][11:] for row in reader if row[2] == '']
 	return np.array(x_testFile)
 
@@ -61,7 +60,7 @@ def get_setB_file_label(N):
 	with open('Data/set_b.csv') as csvfile:
 		reader = csv.reader(csvfile)
 		for row in reader:
-			if not row[2] == '' and not row[2] == 'label': #and 'noisy' not in row[1]:
+			if not row[2] == '' and not row[2] == 'label':
 				fname = 'Data/set_b/' + row[1][21:]
 				new_fname = ''
 				count = 0

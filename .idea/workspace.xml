@@ -2,7 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a19c9b7f-71e1-45e8-aff0-a5cfd09e6070" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bentley Data/Results/DecisionTreeClassifier_A.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Bentley Data/Results/DecisionTreeClassifier_A.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bentley Data/Results/DecisionTreeClassifier_B.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Bentley Data/Results/DecisionTreeClassifier_B.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bentley Data/Results/GradientBoostingClassifier_A.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Bentley Data/Results/GradientBoostingClassifier_A.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bentley Data/Results/GradientBoostingClassifier_B.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Bentley Data/Results/GradientBoostingClassifier_B.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bentley Data/Results/RandomForestClassifier_A.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Bentley Data/Results/RandomForestClassifier_A.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bentley Data/Results/RandomForestClassifier_B.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Bentley Data/Results/RandomForestClassifier_B.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bentley Data/features.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bentley Data/features.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bentley Data/finding_features.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bentley Data/finding_features.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bentley Data/misc/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bentley Data/misc/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bentley Data/preprocessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bentley Data/preprocessing.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,8 +25,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Bentley Data/finding_features.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1005">
-              <caret line="500" column="51" selection-start-line="500" selection-start-column="51" selection-end-line="500" selection-end-column="51" />
+            <state relative-caret-position="179">
+              <caret line="403" column="36" lean-forward="true" selection-start-line="403" selection-start-column="36" selection-end-line="403" selection-end-column="36" />
               <folding>
                 <element signature="e#10#28#0" expanded="true" />
               </folding>
@@ -25,10 +35,34 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Bentley Data/features.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="26" column="56" lean-forward="true" selection-start-line="26" selection-start-column="56" selection-end-line="26" selection-end-column="56" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Bentley Data/preprocessing.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-15">
+              <caret line="47" column="36" selection-start-line="47" selection-start-column="36" selection-end-line="47" selection-end-column="36" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Bentley Data/misc/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="113" lean-forward="true" selection-start-line="113" selection-end-line="113" />
+            <state relative-caret-position="270">
+              <caret line="18" column="43" lean-forward="true" selection-start-line="18" selection-start-column="43" selection-end-line="18" selection-end-column="43" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -44,8 +78,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="8" lean-forward="true" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+            <state relative-caret-position="135">
+              <caret line="9" selection-start-line="9" selection-end-line="9" selection-end-column="46" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -77,6 +111,8 @@
       <find>_Btraining</find>
       <find>aun</find>
       <find>plt.show</find>
+      <find>y_trainA</find>
+      <find>numA</find>
     </findStrings>
     <replaceStrings>
       <replace>Data/</replace>
@@ -93,16 +129,16 @@
       <list>
         <option value="$APPLICATION_CONFIG_DIR$/scratches/model.py" />
         <option value="$PROJECT_DIR$/model.py" />
-        <option value="$PROJECT_DIR$/Bentley Data/features.py" />
         <option value="$PROJECT_DIR$/Bentley Data/audioFeatureExtraction.py" />
         <option value="$PROJECT_DIR$/Bentley Data/Data/finding_features.py" />
         <option value="$PROJECT_DIR$/Bentley Data/Data/set_a.csv" />
         <option value="$PROJECT_DIR$/Bentley Data/Data/set_a_timing.csv" />
         <option value="$PROJECT_DIR$/Bentley Data/Data/set_b.csv" />
-        <option value="$PROJECT_DIR$/Bentley Data/preprocessing.py" />
         <option value="$PROJECT_DIR$/Bentley Data/misc/utils.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
         <option value="$PROJECT_DIR$/Bentley Data/finding_features.py" />
+        <option value="$PROJECT_DIR$/Bentley Data/preprocessing.py" />
+        <option value="$PROJECT_DIR$/Bentley Data/features.py" />
       </list>
     </option>
   </component>
@@ -162,6 +198,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -183,7 +220,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.scratch">
+  <component name="RunManager" selected="Python.finding_features">
     <configuration name="features" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Classifying-Heart-Sounds" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -291,8 +328,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.scratch" />
         <item itemvalue="Python.finding_features" />
+        <item itemvalue="Python.scratch" />
         <item itemvalue="Python.preprocessing" />
         <item itemvalue="Python.features" />
         <item itemvalue="Python.model" />
@@ -336,16 +373,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Bentley Data/audioFeatureExtraction.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="286" lean-forward="true" selection-start-line="286" selection-end-line="286" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -355,19 +382,6 @@
     </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_2.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_1.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Bentley Data/features.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Bentley Data/Data/set_a_timing.csv">
       <provider selected="true" editor-type-id="text-editor">
@@ -383,16 +397,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Bentley Data/preprocessing.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="54" column="38" lean-forward="true" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Bentley Data/Data/set_b.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="9570">
@@ -400,37 +404,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Bentley Data/Results/AdaBoostClassifier_A.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Bentley Data/Results/DecisionTreeClassifier_A.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Bentley Data/Results/RandomForestClassifier_B.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Bentley Data/Results/SVM_B.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Bentley Data/Results/AdaBoostClassifier_B.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Bentley Data/Results/GaussianNB_B.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Bentley Data/Results/GradientBoostingClassifier_B.csv">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Bentley Data/Results/GaussianNB_A.csv">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" selection-start-line="9" selection-end-line="9" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Bentley Data/audioFeatureExtraction.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3856">
+          <caret line="286" lean-forward="true" selection-start-line="286" selection-end-line="286" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Bentley Data/Results/GradientBoostingClassifier_B.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Bentley Data/Results/GaussianNB_B.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/Bentley Data/Results/DecisionTreeClassifier_B.csv">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
+    <entry file="file://$PROJECT_DIR$/Bentley Data/Results/DecisionTreeClassifier_A.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Bentley Data/Results/AdaBoostClassifier_B.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Bentley Data/Results/SVM_A.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Bentley Data/Results/AdaBoostClassifier_A.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Bentley Data/Results/SVM_B.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_1.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Bentley Data/misc/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="8" lean-forward="true" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+        <state relative-caret-position="270">
+          <caret line="18" column="43" lean-forward="true" selection-start-line="18" selection-start-column="43" selection-end-line="18" selection-end-column="43" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -439,20 +469,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Bentley Data/finding_features.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1005">
-          <caret line="500" column="51" selection-start-line="500" selection-start-column="51" selection-end-line="500" selection-end-column="51" />
+        <state relative-caret-position="179">
+          <caret line="403" column="36" lean-forward="true" selection-start-line="403" selection-start-column="36" selection-end-line="403" selection-end-column="36" />
           <folding>
             <element signature="e#10#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Bentley Data/misc/utils.py">
+    <entry file="file://$PROJECT_DIR$/Bentley Data/preprocessing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="113" lean-forward="true" selection-start-line="113" selection-end-line="113" />
+        <state relative-caret-position="-15">
+          <caret line="47" column="36" selection-start-line="47" selection-start-column="36" selection-end-line="47" selection-end-column="36" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Bentley Data/features.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="56" lean-forward="true" selection-start-line="26" selection-start-column="56" selection-end-line="26" selection-end-column="56" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
