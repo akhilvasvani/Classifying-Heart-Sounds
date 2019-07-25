@@ -407,91 +407,91 @@ def main():
     stdS1_A, stdS1_testA, stdS2_A, stdS2_testA, meanS1_freqA, meanS2_freqA, stdS1_freqA, stdS2_freqA = set_A(x_dataA,
                                                                                                              x_testdataA,
                                                                                                              y_labelA)
-    # stdS1_B, stdS2_B, meanS1_freqB, meanS2_freqB, stdS1_freqB, stdS2_freqB = set_B(x_dataB, y_labelB)
-    #
-    # # Opted to use Multi-thread to speed process up
-    # twrv1 = ThreadWithReturnValue(target=zero_crossing, args=(x_dataA, x_dataB, x_testdataA, y_labelA, y_labelB))
-    # twrv2 = ThreadWithReturnValue(target=signal_energy_frame, args=(x_dataA, x_dataB, x_testdataA, y_labelA, y_labelB))
-    # twrv3 = ThreadWithReturnValue(target=entropy_of_energy, args=(x_dataA, x_dataB, x_testdataA, y_labelA, y_labelB))
-    # twrv4 = ThreadWithReturnValue(target=frequency_domain, args=(x_dataA, x_dataB, x_testdataA))
-    #
-    # twrv1.start()
-    # twrv2.start()
-    # twrv3.start()
-    # twrv4.start()
-    #
-    # [zero_crossingsA, zero_crossingsB, zc_testA] = twrv1.join()
-    # [energyA, energyB, ener_testA] = twrv2.join()
-    # [entropyA, entropyB, entr_testA] = twrv3.join()
-    # [X_dataA, X_dataB, X_testdataA] = twrv4.join()
-    #
-    # twrv5 = ThreadWithReturnValue(target=spectral_entropy, args=(X_dataA, X_dataB, X_testdataA, y_labelA, y_labelB))
-    # twrv6 = ThreadWithReturnValue(target=spectral_flux, args=(X_dataA, X_dataB, X_testdataA, y_labelA, y_labelB))
-    # twrv7 = ThreadWithReturnValue(target=spectral_centroid_frame, args=(X_dataA, X_dataB, X_testdataA, y_labelA,
-    #                                                                     y_labelB, framerate_A, framerate_B))
-    # twrv8 = ThreadWithReturnValue(target=get_mcfcc_feat, args=(x_dataA, x_dataB, x_testdataA, framerate_A, framerate_B))
-    #
-    # twrv5.start()
-    # twrv6.start()
-    # twrv7.start()
-    # twrv8.start()
-    #
-    # [entropy_freqA, entropy_freqB, entr_freqtestA] = twrv5.join()
-    # [fluxA, fluxB, flux_testA] = twrv6.join()
-    # [centroidA, centroidB, cent_testA] = twrv7.join()
-    # [mfccA_feat, mfccB_feat, mfcctestA_feat] = twrv8.join()
-    #
-    # # features to use
-    # # zero_crossings, energy, entropy, entropy frequency, flux, spread, mfcc #fluxA, flux_testA, fluxB
-    # x_utrainA = np.column_stack((zero_crossingsA, energyA, entropyA, entropy_freqA, fluxA, centroidA[:, 1], mfccA_feat,
-    #                              stdS1_A, stdS2_A, stdS1_freqA, meanS1_freqA, stdS2_freqA, meanS2_freqA))
-    # x_utestA = np.column_stack((zc_testA, ener_testA, entr_testA, entr_freqtestA, flux_testA, cent_testA[:, 1],
-    #                             mfcctestA_feat, stdS1_testA, stdS2_testA))
-    #
-    # x_utrainB = np.column_stack((zero_crossingsB, energyB, entropyB, entropy_freqB, fluxB, centroidB[:, 1], mfccB_feat,
-    #                              stdS1_B, stdS2_B, stdS1_freqB, meanS1_freqB, stdS2_freqB, meanS2_freqB))
-    #
-    # le = preprocessing.LabelEncoder()
-    # y_utrainA = le.fit_transform(y_labelA)  # 0 - artifact, 1 - extrahls, 2 - murmur, 3 - normal
-    # y_utrainB = le.fit_transform(y_labelB)
-    #
-    # # shuffle data
-    # x_trainA, y_trainA = shuffle(x_utrainA, y_utrainA, random_state=3)
-    # x_trainB, y_trainB = shuffle(x_utrainB, y_utrainB, random_state=2)
-    #
-    # # split kfold data
-    # kf = KFold(n_splits=4, shuffle=False, random_state=0)
-    #
-    # # priors of each class
-    # priorsA = [i / len(x_trainA) for i in np.bincount(y_trainA)]
-    # priorsB = [i / len(x_trainB) for i in np.bincount(y_trainB)]
-    #
-    # twrv9 = ThreadWithReturnValue(target=run_model, args=('GaussianNB', kf, x_trainA, x_trainB, y_trainA, y_trainB,
-    #                                                       priorsA, priorsB))
-    # twrv10 = ThreadWithReturnValue(target=run_model, args=('AdaBoostClassifier', kf, x_trainA, x_trainB, y_trainA,
-    #                                                        y_trainB, priorsA, priorsB))
-    # twrv11 = ThreadWithReturnValue(target=run_model, args=('SVM', kf, x_trainA, x_trainB, y_trainA, y_trainB, priorsA,
-    #                                                        priorsB))
-    # twrv12 = ThreadWithReturnValue(target=run_model, args=('DecisionTreeClassifier', kf, x_trainA, x_trainB, y_trainA,
-    #                                                        y_trainB, priorsA, priorsB))
-    # twrv13 = ThreadWithReturnValue(target=run_model, args=('RandomForestClassifier', kf, x_trainA, x_trainB, y_trainA,
-    #                                                        y_trainB, priorsA, priorsB))
-    # twrv14 = ThreadWithReturnValue(target=run_model, args=('GradientBoostingClassifier', kf, x_trainA, x_trainB,
-    #                                                        y_trainA, y_trainB, priorsA, priorsB))
-    #
-    # twrv9.start()
-    # twrv10.start()
-    # twrv11.start()
-    # twrv12.start()
-    # twrv13.start()
-    # twrv14.start()
-    #
-    # twrv9.join()
-    # twrv10.join()
-    # twrv11.join()
-    # twrv12.join()
-    # twrv13.join()
-    # twrv14.join()
+    stdS1_B, stdS2_B, meanS1_freqB, meanS2_freqB, stdS1_freqB, stdS2_freqB = set_B(x_dataB, y_labelB)
+
+    # Opted to use Multi-thread to speed process up
+    twrv1 = ThreadWithReturnValue(target=zero_crossing, args=(x_dataA, x_dataB, x_testdataA, y_labelA, y_labelB))
+    twrv2 = ThreadWithReturnValue(target=signal_energy_frame, args=(x_dataA, x_dataB, x_testdataA, y_labelA, y_labelB))
+    twrv3 = ThreadWithReturnValue(target=entropy_of_energy, args=(x_dataA, x_dataB, x_testdataA, y_labelA, y_labelB))
+    twrv4 = ThreadWithReturnValue(target=frequency_domain, args=(x_dataA, x_dataB, x_testdataA))
+
+    twrv1.start()
+    twrv2.start()
+    twrv3.start()
+    twrv4.start()
+
+    [zero_crossingsA, zero_crossingsB, zc_testA] = twrv1.join()
+    [energyA, energyB, ener_testA] = twrv2.join()
+    [entropyA, entropyB, entr_testA] = twrv3.join()
+    [X_dataA, X_dataB, X_testdataA] = twrv4.join()
+
+    twrv5 = ThreadWithReturnValue(target=spectral_entropy, args=(X_dataA, X_dataB, X_testdataA, y_labelA, y_labelB))
+    twrv6 = ThreadWithReturnValue(target=spectral_flux, args=(X_dataA, X_dataB, X_testdataA, y_labelA, y_labelB))
+    twrv7 = ThreadWithReturnValue(target=spectral_centroid_frame, args=(X_dataA, X_dataB, X_testdataA, y_labelA,
+                                                                        y_labelB, framerate_A, framerate_B))
+    twrv8 = ThreadWithReturnValue(target=get_mcfcc_feat, args=(x_dataA, x_dataB, x_testdataA, framerate_A, framerate_B))
+
+    twrv5.start()
+    twrv6.start()
+    twrv7.start()
+    twrv8.start()
+
+    [entropy_freqA, entropy_freqB, entr_freqtestA] = twrv5.join()
+    [fluxA, fluxB, flux_testA] = twrv6.join()
+    [centroidA, centroidB, cent_testA] = twrv7.join()
+    [mfccA_feat, mfccB_feat, mfcctestA_feat] = twrv8.join()
+
+    # features to use
+    # zero_crossings, energy, entropy, entropy frequency, flux, spread, mfcc #fluxA, flux_testA, fluxB
+    x_utrainA = np.column_stack((zero_crossingsA, energyA, entropyA, entropy_freqA, fluxA, centroidA[:, 1], mfccA_feat,
+                                 stdS1_A, stdS2_A, stdS1_freqA, meanS1_freqA, stdS2_freqA, meanS2_freqA))
+    x_utestA = np.column_stack((zc_testA, ener_testA, entr_testA, entr_freqtestA, flux_testA, cent_testA[:, 1],
+                                mfcctestA_feat, stdS1_testA, stdS2_testA))
+
+    x_utrainB = np.column_stack((zero_crossingsB, energyB, entropyB, entropy_freqB, fluxB, centroidB[:, 1], mfccB_feat,
+                                 stdS1_B, stdS2_B, stdS1_freqB, meanS1_freqB, stdS2_freqB, meanS2_freqB))
+
+    le = preprocessing.LabelEncoder()
+    y_utrainA = le.fit_transform(y_labelA)  # 0 - artifact, 1 - extrahls, 2 - murmur, 3 - normal
+    y_utrainB = le.fit_transform(y_labelB)
+
+    # shuffle data
+    x_trainA, y_trainA = shuffle(x_utrainA, y_utrainA, random_state=3)
+    x_trainB, y_trainB = shuffle(x_utrainB, y_utrainB, random_state=2)
+
+    # split kfold data
+    kf = KFold(n_splits=4, shuffle=False, random_state=0)
+
+    # priors of each class
+    priorsA = [i / len(x_trainA) for i in np.bincount(y_trainA)]
+    priorsB = [i / len(x_trainB) for i in np.bincount(y_trainB)]
+
+    twrv9 = ThreadWithReturnValue(target=run_model, args=('GaussianNB', kf, x_trainA, x_trainB, y_trainA, y_trainB,
+                                                          priorsA, priorsB))
+    twrv10 = ThreadWithReturnValue(target=run_model, args=('AdaBoostClassifier', kf, x_trainA, x_trainB, y_trainA,
+                                                           y_trainB, priorsA, priorsB))
+    twrv11 = ThreadWithReturnValue(target=run_model, args=('SVM', kf, x_trainA, x_trainB, y_trainA, y_trainB, priorsA,
+                                                           priorsB))
+    twrv12 = ThreadWithReturnValue(target=run_model, args=('DecisionTreeClassifier', kf, x_trainA, x_trainB, y_trainA,
+                                                           y_trainB, priorsA, priorsB))
+    twrv13 = ThreadWithReturnValue(target=run_model, args=('RandomForestClassifier', kf, x_trainA, x_trainB, y_trainA,
+                                                           y_trainB, priorsA, priorsB))
+    twrv14 = ThreadWithReturnValue(target=run_model, args=('GradientBoostingClassifier', kf, x_trainA, x_trainB,
+                                                           y_trainA, y_trainB, priorsA, priorsB))
+
+    twrv9.start()
+    twrv10.start()
+    twrv11.start()
+    twrv12.start()
+    twrv13.start()
+    twrv14.start()
+
+    twrv9.join()
+    twrv10.join()
+    twrv11.join()
+    twrv12.join()
+    twrv13.join()
+    twrv14.join()
 
 
 if __name__ == '__main__':
