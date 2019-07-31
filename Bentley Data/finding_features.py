@@ -24,7 +24,7 @@ from utils import get_S1S2_bounds, stdInterval, freqInterval, featurePlot, Threa
 
 
 def set_A(x_dataA, x_testdataA, y_labelA, if_plot=False):
-    # get peaks for A
+    """Get peaks for A"""
     dataA_peaks = find_peaks(x_dataA, 'A')
     testdataA_peaks = find_peaks(x_testdataA, 'A')
 
@@ -56,9 +56,11 @@ def set_A(x_dataA, x_testdataA, y_labelA, if_plot=False):
         featurePlot(stdS1_A, 'A', y_labelA, title='Standard Deviation of S1 (set A) vs. Feature Labels (set A)')
         featurePlot(stdS2_A, 'A', y_labelA, title='Standard Deviation of S2 (set A) vs. Feature Labels (set A)')
 
-        featurePlot(stdS1_freqA, 'A', y_labelA, title='Standard Deviation of Frequency of S1 (set A) vs. Feature Labels (set A)')
+        featurePlot(stdS1_freqA, 'A', y_labelA, title='Standard Deviation of Frequency of S1 (set A) vs. Feature Labels'
+                                                      ' (set A)')
         featurePlot(meanS1_freqA, 'A', y_labelA, title='Mean of Frequency of S1 (set A) vs. Feature Labels (set A)')
-        featurePlot(stdS2_freqA, 'A', y_labelA, title='Standard Deviation of Frequency of S2 (set A) vs. Feature Labels (set A)')
+        featurePlot(stdS2_freqA, 'A', y_labelA, title='Standard Deviation of Frequency of S2 (set A) vs. Feature Labels'
+                                                      ' (set A)')
         featurePlot(meanS2_freqA, 'A', y_labelA, title='Mean of Frequency of S2 (set A) vs. Feature Labels (set A)')
 
         n = 2
@@ -73,7 +75,7 @@ def set_A(x_dataA, x_testdataA, y_labelA, if_plot=False):
 
 
 def set_B(x_dataB, y_labelB, if_plot=False):
-    # get peaks for B
+    """get peaks for B"""
     dataB_peaks = find_peaks(x_dataB, 'B')
 
     # Get S1 and S2 bounds for set B
@@ -101,8 +103,10 @@ def set_B(x_dataB, y_labelB, if_plot=False):
         featurePlot(stdS1_B, 'B', y_labelB, title='Standard Deviation of S1 (set B) vs. Feature Labels (set B)')
         featurePlot(stdS2_B, 'B', y_labelB, title='Standard Deviation of S2 (set B) vs. Feature Labels (set B)')
 
-        featurePlot(stdS1_freqB, 'B', y_labelB, title='Standard Deviation of Frequency of S1 (set B) vs. Feature Labels (set B)')
-        featurePlot(stdS2_freqB, 'B', y_labelB, title='Standard Deviation of Frequency of S2 (set B) vs. Feature Labels (set B)')
+        featurePlot(stdS1_freqB, 'B', y_labelB, title='Standard Deviation of Frequency of S1 (set B) vs. Feature Labels'
+                                                      ' (set B)')
+        featurePlot(stdS2_freqB, 'B', y_labelB, title='Standard Deviation of Frequency of S2 (set B) vs. Feature Labels'
+                                                      ' (set B)')
         featurePlot(meanS1_freqB, 'B', y_labelB, title='Mean of Frequency of S1 (set B) vs. Feature Labels (set B)')
         featurePlot(meanS2_freqB, 'B', y_labelB, title='Mean of Frequency of S2 (set B) vs. Feature Labels (set B)')
 
@@ -117,20 +121,22 @@ def set_B(x_dataB, y_labelB, if_plot=False):
 
 
 def zero_crossing(x_dataA, x_dataB, x_testdataA, y_labelA, y_labelB, if_plot=False):
-    # zero crossing rate of frame
+    """zero crossing rate of frame"""
     zero_crossingsA = normalize(np.array([audioFeatureExtraction.stZCR(x) for x in x_dataA]))
     zero_crossingsB = normalize(np.array([audioFeatureExtraction.stZCR(x) for x in x_dataB]))
     zc_testA = normalize(np.array([audioFeatureExtraction.stZCR(x) for x in x_testdataA]))
 
     if if_plot:
-        featurePlot(zero_crossingsA, 'A', y_labelA, title='Zero Crossings Rate of Frame (set A) vs Feature Labels (set A)')
-        featurePlot(zero_crossingsB, 'B', y_labelB, title='Zero Crossings Rate of Frame (set B) vs Feature Labels (set B)')
+        featurePlot(zero_crossingsA, 'A', y_labelA, title='Zero Crossings Rate of Frame (set A) vs Feature Labels'
+                                                          ' (set A)')
+        featurePlot(zero_crossingsB, 'B', y_labelB, title='Zero Crossings Rate of Frame (set B) vs Feature Labels'
+                                                          ' (set B)')
 
     return zero_crossingsA, zero_crossingsB, zc_testA
 
 
 def signal_energy_frame(x_dataA, x_dataB, x_testdataA, y_labelA, y_labelB, if_plot=False):
-    # signal energy of frame
+    """signal energy of frame"""
     energyA = normalize(np.array([audioFeatureExtraction.stEnergy(x) for x in x_dataA]))
     energyB = normalize(np.array([audioFeatureExtraction.stEnergy(x) for x in x_dataB]))
     ener_testA = normalize(np.array([audioFeatureExtraction.stEnergy(x) for x in x_testdataA]))
@@ -143,10 +149,11 @@ def signal_energy_frame(x_dataA, x_dataB, x_testdataA, y_labelA, y_labelB, if_pl
 
 
 def entropy_of_energy(x_dataA, x_dataB, x_testdataA, y_labelA, y_labelB, if_plot=False):
-    # Entropy of Energy
+    """Entropy of Energy"""
     entropyA = normalize(np.array([audioFeatureExtraction.stEnergyEntropy(x, numOfShortBlocks=50) for x in x_dataA]))
     entropyB = normalize(np.array([audioFeatureExtraction.stEnergyEntropy(x, numOfShortBlocks=50) for x in x_dataB]))
-    entr_testA = normalize(np.array([audioFeatureExtraction.stEnergyEntropy(x, numOfShortBlocks=50) for x in x_testdataA]))
+    entr_testA = normalize(np.array([audioFeatureExtraction.stEnergyEntropy(x, numOfShortBlocks=50)
+                                     for x in x_testdataA]))
 
     if if_plot:
         featurePlot(entropyA, 'A', y_labelA, title='Entropy of Energy (set A) vs Feature Labels (set A)')
@@ -156,7 +163,8 @@ def entropy_of_energy(x_dataA, x_dataB, x_testdataA, y_labelA, y_labelB, if_plot
 
 
 def frequency_domain(x_dataA, x_dataB, x_testdataA, if_plot=False):
-    # Get the frequency domain of signal
+    """Get the frequency domain of signal"""
+
     X_dataA = np.array([np.fft.fft(x) for x in x_dataA])
     X_dataA = np.array([np.abs(X) / max(np.abs(X)) for X in X_dataA])
 
@@ -190,10 +198,14 @@ def frequency_domain(x_dataA, x_dataB, x_testdataA, if_plot=False):
 
 
 def spectral_entropy(X_dataA, X_dataB, X_testdataA, y_labelA, y_labelB, if_plot=False):
-    # Get the Spectral entropy
-    entropy_freqA = normalize(np.array([audioFeatureExtraction.stSpectralEntropy(X, numOfShortBlocks=150) for X in X_dataA]))
-    entropy_freqB = normalize(np.array([audioFeatureExtraction.stSpectralEntropy(X, numOfShortBlocks=50) for X in X_dataB]))
-    entr_freqtestA = normalize(np.array([audioFeatureExtraction.stSpectralEntropy(X, numOfShortBlocks=150) for X in X_testdataA]))
+    """Get the Spectral entropy"""
+
+    entropy_freqA = normalize(np.array([audioFeatureExtraction.stSpectralEntropy(X, numOfShortBlocks=150)
+                                        for X in X_dataA]))
+    entropy_freqB = normalize(np.array([audioFeatureExtraction.stSpectralEntropy(X, numOfShortBlocks=50)
+                                        for X in X_dataB]))
+    entr_freqtestA = normalize(np.array([audioFeatureExtraction.stSpectralEntropy(X, numOfShortBlocks=150)
+                                         for X in X_testdataA]))
 
     if if_plot:
         featurePlot(entropy_freqA, 'A', y_labelA, title='Spectral Entropy (set A) vs Feature Labels (set A)')
@@ -203,10 +215,13 @@ def spectral_entropy(X_dataA, X_dataB, X_testdataA, y_labelA, y_labelB, if_plot=
 
 
 def spectral_flux(X_dataA, X_dataB, X_testdataA, y_labelA, y_labelB, if_plot=False):
-    # spectral flux
-    fluxA = normalize(np.array([np.abs(audioFeatureExtraction.stSpectralFlux(X[:int(len(X) / 2)], X[int(len(X) / 2):])) for X in X_dataA]))
-    fluxB = normalize(np.array([np.abs(audioFeatureExtraction.stSpectralFlux(X[:int(len(X) / 2)], X[int(len(X) / 2) + 1:])) for X in X_dataB]))
-    flux_testA = normalize(np.array([np.abs(audioFeatureExtraction.stSpectralFlux(X[:int(len(X) / 2)], X[int(len(X) / 2):])) for X in X_testdataA]))
+    """ Get spectral flux """
+    fluxA = normalize(np.array([np.abs(audioFeatureExtraction.stSpectralFlux(X[:int(len(X) / 2)], X[int(len(X) / 2):]))
+                                for X in X_dataA]))
+    fluxB = normalize(np.array([np.abs(audioFeatureExtraction.stSpectralFlux(X[:int(len(X) / 2)],
+                                                                             X[int(len(X) / 2) + 1:])) for X in X_dataB]))
+    flux_testA = normalize(np.array([np.abs(audioFeatureExtraction.stSpectralFlux(X[:int(len(X) / 2)],
+                                                                                  X[int(len(X) / 2):])) for X in X_testdataA]))
 
     if if_plot:
         featurePlot(fluxA, 'A', y_labelA, title='Spectral Flux (set A) vs Feature Labels (set A)')
@@ -216,7 +231,8 @@ def spectral_flux(X_dataA, X_dataB, X_testdataA, y_labelA, y_labelB, if_plot=Fal
 
 
 def spectral_centroid_frame(X_dataA, X_dataB, X_testdataA, y_labelA, y_labelB, framerate_A, framerate_B, if_plot=False):
-    # spectral centroid of frame (given abs(FFT))
+    """Get Spectral centroid of frame (given abs(FFT))"""
+
     FsA = int(framerate_A[0] / 20)  # framerate is the same for all of set A
     FsB = int(framerate_B[0] / 10)  # framerate is the same for all of set B
 
@@ -242,7 +258,8 @@ def spectral_centroid_frame(X_dataA, X_dataB, X_testdataA, y_labelA, y_labelB, f
 
 
 def get_mcfcc_feat(x_dataA, x_dataB, x_testdataA, framerate_A, framerate_B, if_plot=False):
-    # Get the MFCC features
+    """Get the MFCC features"""
+
     FsA = int(framerate_A[0] / 10)  # framerate is the same for all of set A
     FsB = int(framerate_B[0] / 4)  # framerate is the same for all of set B
 
@@ -253,7 +270,8 @@ def get_mcfcc_feat(x_dataA, x_dataB, x_testdataA, framerate_A, framerate_B, if_p
         mfccA_feat[:, i] = np.abs(mfccA_feat[:, i]) / max(np.abs(mfccA_feat[:, i]))
 
     mfccB = np.array([mfcc(np.abs(x), samplerate=FsB, numcep=5, winlen=0.01, winstep=0.01) for x in x_dataB])
-    mfccB_feat = np.array([[np.average(m[:, 0]), np.std(m[:, 0]), np.average(m[:, 1]), np.std(m[:, 1]), np.average(m[:, 2]), np.std(m[:, 2])] for m in mfccB])
+    mfccB_feat = np.array([[np.average(m[:, 0]), np.std(m[:, 0]), np.average(m[:, 1]), np.std(m[:, 1]),
+                            np.average(m[:, 2]), np.std(m[:, 2])] for m in mfccB])
     for i in range(len(mfccB_feat[0])):
         mfccB_feat[:, i] = np.abs(mfccB_feat[:, i]) / max(np.abs(mfccB_feat[:, i]))
 
@@ -273,7 +291,8 @@ def get_mcfcc_feat(x_dataA, x_dataB, x_testdataA, framerate_A, framerate_B, if_p
 
 
 def run_model(method, kf, x_trainA, x_trainB, y_trainA, y_trainB, priorsA, priorsB):
-    # Run several ML algorithms for classifying S1 and S2 into the 4 categories
+    """Run several ML algorithms for classifying S1 and S2 into the 4 categories"""
+
     resultsA = []
     modelA = []  # the models are saved here
     i = 0
@@ -312,9 +331,12 @@ def run_model(method, kf, x_trainA, x_trainB, y_trainA, y_trainB, priorsA, prior
                 precisionsA[n].append(0)
             else:
                 precisionsA[n].append(float(TP_A[n] / (TP_A[n] + FP_A[n])))
+
         TP = cm[0][0] + cm[1][1] + cm[2][2] + cm[3][3]
-        FP = np.sum(cm[1:, 0]) + np.sum(cm[0:1, 1]) + np.sum(cm[2:, 1]) + np.sum(cm[0:2, 2] + cm[3:, 2]) + np.sum(cm[0:3, 3])
-        FN = np.sum(cm[0, 1:]) + np.sum(cm[1, 0:1]) + np.sum(cm[1, 2:]) + np.sum(cm[2, 0:2]) + np.sum(cm[2, 3:]) + np.sum(cm[3, 0:3])
+        FP = np.sum(cm[1:, 0]) + np.sum(cm[0:1, 1]) + np.sum(cm[2:, 1]) + np.sum(cm[0:2, 2] + cm[3:, 2]) + \
+             np.sum(cm[0:3, 3])
+        FN = np.sum(cm[0, 1:]) + np.sum(cm[1, 0:1]) + np.sum(cm[1, 2:]) + np.sum(cm[2, 0:2]) + np.sum(cm[2, 3:]) + \
+             np.sum(cm[3, 0:3])
         p_modelA.append(float(TP / (TP + FP)))
         r_modelA.append(float(TP / (TP + FN)))
         i += 1
@@ -352,7 +374,8 @@ def run_model(method, kf, x_trainA, x_trainB, y_trainA, y_trainB, priorsA, prior
         elif method == 'DecisionTreeClassifer':
             modelB.append(DecisionTreeClassifier(max_depth=5, min_samples_split=10, min_samples_leaf=3))
         elif method == 'RandomForestClassifer':
-            modelB.append(RandomForestClassifier(n_estimators=100, max_depth=10, min_samples_leaf=1, min_samples_split=3))
+            modelB.append(RandomForestClassifier(n_estimators=100, max_depth=10, min_samples_leaf=1,
+                                                 min_samples_split=3))
         else:  # method == GradientBoostingClassifer
             modelB.append(GradientBoostingClassifier(n_estimators=100, learning_rate=0.01, max_depth=15))
 
@@ -393,8 +416,9 @@ def run_model(method, kf, x_trainA, x_trainB, y_trainA, y_trainB, priorsA, prior
 
 
 def main():
-
-    # To plot any the following function --> set if_plot to True in each of the arguments for the function
+    """ The main script. Runs all of the above functions. and saves in the result folder all of the accuracies
+        and predictions for each ML algorithm.
+        To plot any the following function --> set if_plot to True in each of the function arguments."""
 
     # Get the preprocesed data
     x_dataA, y_labelA, framerate_A = get_preprocessed_data('A', N=2, factor=5)
@@ -407,6 +431,7 @@ def main():
     stdS1_A, stdS1_testA, stdS2_A, stdS2_testA, meanS1_freqA, meanS2_freqA, stdS1_freqA, stdS2_freqA = set_A(x_dataA,
                                                                                                              x_testdataA,
                                                                                                              y_labelA)
+
     stdS1_B, stdS2_B, meanS1_freqB, meanS2_freqB, stdS1_freqB, stdS2_freqB = set_B(x_dataB, y_labelB)
 
     # Opted to use Multi-thread to speed process up
@@ -468,30 +493,30 @@ def main():
 
     twrv9 = ThreadWithReturnValue(target=run_model, args=('GaussianNB', kf, x_trainA, x_trainB, y_trainA, y_trainB,
                                                           priorsA, priorsB))
-    twrv10 = ThreadWithReturnValue(target=run_model, args=('AdaBoostClassifier', kf, x_trainA, x_trainB, y_trainA,
-                                                           y_trainB, priorsA, priorsB))
-    twrv11 = ThreadWithReturnValue(target=run_model, args=('SVM', kf, x_trainA, x_trainB, y_trainA, y_trainB, priorsA,
-                                                           priorsB))
-    twrv12 = ThreadWithReturnValue(target=run_model, args=('DecisionTreeClassifier', kf, x_trainA, x_trainB, y_trainA,
-                                                           y_trainB, priorsA, priorsB))
-    twrv13 = ThreadWithReturnValue(target=run_model, args=('RandomForestClassifier', kf, x_trainA, x_trainB, y_trainA,
-                                                           y_trainB, priorsA, priorsB))
-    twrv14 = ThreadWithReturnValue(target=run_model, args=('GradientBoostingClassifier', kf, x_trainA, x_trainB,
-                                                           y_trainA, y_trainB, priorsA, priorsB))
+    # twrv10 = ThreadWithReturnValue(target=run_model, args=('AdaBoostClassifier', kf, x_trainA, x_trainB, y_trainA,
+    #                                                        y_trainB, priorsA, priorsB))
+    # twrv11 = ThreadWithReturnValue(target=run_model, args=('SVM', kf, x_trainA, x_trainB, y_trainA, y_trainB, priorsA,
+    #                                                        priorsB))
+    # twrv12 = ThreadWithReturnValue(target=run_model, args=('DecisionTreeClassifier', kf, x_trainA, x_trainB, y_trainA,
+    #                                                        y_trainB, priorsA, priorsB))
+    # twrv13 = ThreadWithReturnValue(target=run_model, args=('RandomForestClassifier', kf, x_trainA, x_trainB, y_trainA,
+    #                                                        y_trainB, priorsA, priorsB))
+    # twrv14 = ThreadWithReturnValue(target=run_model, args=('GradientBoostingClassifier', kf, x_trainA, x_trainB,
+    #                                                        y_trainA, y_trainB, priorsA, priorsB))
 
     twrv9.start()
-    twrv10.start()
-    twrv11.start()
-    twrv12.start()
-    twrv13.start()
-    twrv14.start()
+    # twrv10.start()
+    # twrv11.start()
+    # twrv12.start()
+    # twrv13.start()
+    # twrv14.start()
 
     twrv9.join()
-    twrv10.join()
-    twrv11.join()
-    twrv12.join()
-    twrv13.join()
-    twrv14.join()
+    # twrv10.join()
+    # twrv11.join()
+    # twrv12.join()
+    # twrv13.join()
+    # twrv14.join()
 
 
 if __name__ == '__main__':
