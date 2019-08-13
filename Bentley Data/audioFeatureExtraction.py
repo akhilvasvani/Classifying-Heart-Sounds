@@ -123,7 +123,7 @@ def stSpectralRollOff(X, c, fs):
     # Ffind the spectral rolloff as the frequency position where the respective spectral energy is equal to c*totalEnergy
     CumSum = numpy.cumsum(X ** 2) + eps
     [a, ] = numpy.nonzero(CumSum > Thres)
-    if not a:
+    if a.size > 0:
         mC = numpy.float64(a[0]) / (float(fftLength))
     else:
         mC = 0.0
@@ -143,7 +143,7 @@ def stHarmonic(frame, fs):
     # estimate m0 (as the first zero crossing of R)
     [a, ] = numpy.nonzero(numpy.diff(numpy.sign(R)))
 
-    if a:
+    if a.size == 0:
         m0 = len(R)-1
     else:
         m0 = a[0]
@@ -160,7 +160,7 @@ def stHarmonic(frame, fs):
         HR = 0.0
         f0 = 0.0
     else:
-        if Gamma:
+        if Gamma.size == 0:
             HR = 1.0
             blag = 0.0
             Gamma = numpy.zeros((int(M)), dtype=numpy.float64)
@@ -264,8 +264,8 @@ def stChromaFeaturesInit(nfft, fs):
 
 
 def stChromaFeatures(X, fs, nChroma, nFreqsPerChroma):
-    #TODO: 1 complexity
-    #TODO: 2 bug with large windows
+    # TODO: 1 complexity
+    # TODO: 2 bug with large windows
 
     chromaNames = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#']
     spec = X**2    
@@ -745,7 +745,7 @@ def dirWavFeatureExtraction(dirName, mtWin, mtStep, stWin, stStep, computeBEAT=F
 
         t1 = time.clock()        
         x = audioBasicIO.stereo2mono(x)                          # convert stereo to mono                
-        if x.shape[0]<float(Fs)/10:
+        if x.shape[0] < float(Fs)/10:
             print("  (AUDIO FILE TOO SMALL - SKIPPING)")
             continue
         wavFilesList2.append(wavFile)
@@ -763,7 +763,7 @@ def dirWavFeatureExtraction(dirName, mtWin, mtStep, stWin, stStep, computeBEAT=F
             if computeBEAT:
                 MidTermFeatures = numpy.append(MidTermFeatures, beat)
                 MidTermFeatures = numpy.append(MidTermFeatures, beatConf)
-            if allMtFeatures:                              # append feature vector
+            if allMtFeatures.size == 0:                              # append feature vector
                 allMtFeatures = MidTermFeatures
             else:
                 allMtFeatures = numpy.vstack((allMtFeatures, MidTermFeatures))
@@ -841,7 +841,7 @@ def dirWavFeatureExtractionNoAveraging(dirName, mtWin, mtStep, stWin, stStep):
 
         MidTermFeatures = numpy.transpose(MidTermFeatures)
 #        MidTermFeatures = MidTermFeatures.mean(axis=0)        # long term averaging of mid-term statistics
-        if allMtFeatures:                # append feature vector
+        if allMtFeatures.size == 0:                # append feature vector
             allMtFeatures = MidTermFeatures
             signalIndices = numpy.zeros((MidTermFeatures.shape[0], ))
         else:
