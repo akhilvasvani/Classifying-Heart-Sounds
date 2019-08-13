@@ -290,8 +290,8 @@ def get_mcfcc_feat(x_dataA, x_dataB, x_testdataA, framerate_A, framerate_B, if_p
     return mfccA_feat, mfccB_feat, mfcctestA_feat
 
 
-def run_model(method, kf, x_trainA, x_trainB, y_trainA, y_trainB, priorsA, priorsB):
-    """Run several ML algorithms for classifying S1 and S2 into the 4 categories"""
+def run_model_A(method, kf, x_trainA, y_trainA, priorsA):
+    """ Run several ML algorithms for classifying S1 and S2 into the 4 categories """
 
     resultsA = []
     modelA = []  # the models are saved here
@@ -320,7 +320,7 @@ def run_model(method, kf, x_trainA, x_trainB, y_trainA, y_trainB, priorsA, prior
         preds = modelA[i].predict(x_trainA[test_index])
         actual = y_trainA[test_index]
 
-        for p in range(len(preds)):
+        for p, item in enumerate(preds):
             cm[actual[p]][preds[p]] += 1
             if preds[p] == actual[p]:
                 TP_A[preds[p]] += 1
@@ -354,6 +354,9 @@ def run_model(method, kf, x_trainA, x_trainB, y_trainA, y_trainB, priorsA, prior
         writer.writerow(['Average results: ', np.average(resultsA)])
     file_a.close()
 
+
+def run_model_B(method, kf, x_trainB, y_trainB,  priorsB):
+    """ Run several ML algorithms for classifying S1 and S2 into the 4 categories """
     resultsB = []
     modelB = []  # the models are saved here
     i = 0
@@ -384,7 +387,7 @@ def run_model(method, kf, x_trainA, x_trainB, y_trainA, y_trainB, priorsA, prior
         preds = modelB[i].predict(x_trainB[test_index])
         actual = y_trainB[test_index]
 
-        for p in range(len(preds)):
+        for p, item in enumerate(preds):
             cm[actual[p]][preds[p]] += 1
             if preds[p] == actual[p]:
                 TP_B[preds[p]] += 1
@@ -491,32 +494,45 @@ def main():
     priorsA = [i / len(x_trainA) for i in np.bincount(y_trainA)]
     priorsB = [i / len(x_trainB) for i in np.bincount(y_trainB)]
 
-    twrv9 = ThreadWithReturnValue(target=run_model, args=('GaussianNB', kf, x_trainA, x_trainB, y_trainA, y_trainB,
-                                                          priorsA, priorsB))
-    # twrv10 = ThreadWithReturnValue(target=run_model, args=('AdaBoostClassifier', kf, x_trainA, x_trainB, y_trainA,
-    #                                                        y_trainB, priorsA, priorsB))
-    # twrv11 = ThreadWithReturnValue(target=run_model, args=('SVM', kf, x_trainA, x_trainB, y_trainA, y_trainB, priorsA,
-    #                                                        priorsB))
-    # twrv12 = ThreadWithReturnValue(target=run_model, args=('DecisionTreeClassifier', kf, x_trainA, x_trainB, y_trainA,
-    #                                                        y_trainB, priorsA, priorsB))
-    # twrv13 = ThreadWithReturnValue(target=run_model, args=('RandomForestClassifier', kf, x_trainA, x_trainB, y_trainA,
-    #                                                        y_trainB, priorsA, priorsB))
-    # twrv14 = ThreadWithReturnValue(target=run_model, args=('GradientBoostingClassifier', kf, x_trainA, x_trainB,
-    #                                                        y_trainA, y_trainB, priorsA, priorsB))
+    twrv9 = ThreadWithReturnValue(target=run_model_A, args=('GaussianNB', kf, x_trainA, y_trainA, priorsA))
+    twrv10 = ThreadWithReturnValue(target=run_model_A, args=('AdaBoostClassifier', kf, x_trainA, y_trainA, priorsA))
+    twrv11 = ThreadWithReturnValue(target=run_model_A, args=('SVM', kf, x_trainA, y_trainA, priorsA))
+    twrv12 = ThreadWithReturnValue(target=run_model_A, args=('DecisionTreeClassifier', kf, x_trainA, y_trainA, priorsA))
+    twrv13 = ThreadWithReturnValue(target=run_model_A, args=('RandomForestClassifier', kf, x_trainA, y_trainA, priorsA))
+    twrv14 = ThreadWithReturnValue(target=run_model_A, args=('GradientBoostingClassifier', kf, x_trainA, y_trainA, priorsA))
+
+    twrv15 = ThreadWithReturnValue(target=run_model_B, args=('GaussianNB', kf, x_trainB, y_trainB, priorsB))
+    twrv16 = ThreadWithReturnValue(target=run_model_B, args=('AdaBoostClassifier', kf, x_trainB, y_trainB, priorsB))
+    twrv17 = ThreadWithReturnValue(target=run_model_B, args=('SVM', kf, x_trainB, y_trainB, priorsB))
+    twrv18 = ThreadWithReturnValue(target=run_model_B, args=('DecisionTreeClassifier', kf, x_trainB, y_trainB, priorsB))
+    twrv19 = ThreadWithReturnValue(target=run_model_B, args=('RandomForestClassifier', kf, x_trainB, y_trainB, priorsB))
+    twrv20 = ThreadWithReturnValue(target=run_model_B, args=('GradientBoostingClassifier', kf, x_trainB, y_trainB, priorsB))
 
     twrv9.start()
-    # twrv10.start()
-    # twrv11.start()
-    # twrv12.start()
-    # twrv13.start()
-    # twrv14.start()
+    twrv10.start()
+    twrv11.start()
+    twrv12.start()
+    twrv13.start()
+    twrv14.start()
+    twrv15.start()
+    twrv16.start()
+    twrv17.start()
+    twrv18.start()
+    twrv19.start()
+    twrv20.start()
 
     twrv9.join()
-    # twrv10.join()
-    # twrv11.join()
-    # twrv12.join()
-    # twrv13.join()
-    # twrv14.join()
+    twrv10.join()
+    twrv11.join()
+    twrv12.join()
+    twrv13.join()
+    twrv14.join()
+    twrv15.join()
+    twrv16.join()
+    twrv17.join()
+    twrv18.join()
+    twrv19.join()
+    twrv20.join()
 
 
 if __name__ == '__main__':

@@ -12,7 +12,7 @@ def get_S1S2_bounds(data, peaks, set_name):
     # and then labelling the first peak as s2 and second peak as s1
     max_index = []
     s1s2_peaks = []
-    for j in range(len(all_diffs)):
+    for j, item in enumerate(all_diffs):
         if any(all_diffs[j]):
             max_index.append(np.argmax(all_diffs[j]))
             s2 = peaks[j][max_index[j]]
@@ -31,7 +31,7 @@ def get_S1S2_bounds(data, peaks, set_name):
     else:
         upper_s1, lower_s1, upper_s2, lower_s2 = np.array([25, 10, 35, 10]) * 10
 
-    for k in range(len(s1s2_peaks)):
+    for k, item in enumerate(s1s2_peaks):
         if s1s2_peaks[k][0] == -1:
             s1_bounds.append([-1, -1])
             s2_bounds.append([-1, -1])
@@ -57,7 +57,7 @@ def featurePlot(feat, set_name, label, **kwargs):
     if set_name.upper() == 'A':
         print("Red=artifacts, blue=extrahls, purple=murmur, cyan=normal")
         y_labelA = label
-        for i in range(len(feat)):
+        for i, item in enumerate(feat):
             if y_labelA[i] == 'artifact':
                 plt.scatter(i, feat[i], c='r')
             elif y_labelA[i] == 'extrahls':
@@ -71,7 +71,7 @@ def featurePlot(feat, set_name, label, **kwargs):
     else:
         print("blue=extrastole, purple=murmur, cyan=normal")
         y_labelB = label
-        for i in range(len(feat)):
+        for i, item in enumerate(feat):
             if y_labelB[i] == 'extrastole':
                 plt.scatter(i, feat[i], c='k')
             elif y_labelB[i] == 'murmur':
@@ -84,10 +84,10 @@ def featurePlot(feat, set_name, label, **kwargs):
 
 
 def stdInterval(lower, low_index, upper, up_index, data):
-    """std deviation of specific interval where lower is the left most bound of the interval,
-        upper is right most bound"""
+    """ std deviation of specific interval where lower is the left most bound of the interval,
+        upper is right most bound. """
     std = []
-    for k in range(len(data)):
+    for k, item in enumerate(data):
         if lower[k][0] == -1:
             std.append(0)
         else:
@@ -100,16 +100,15 @@ def stdInterval(lower, low_index, upper, up_index, data):
 
 
 def normalize(a):
-    if type(a) is np.ndarray:
+    if isinstance(a, np.ndarray):
         return a / max(a)
     else:
-        print('Error: not a numpy array')
-        return
+        raise TypeError('Error: not a numpy array')
 
 
 def freqInterval(data, lower, l_index, upper, u_index):
     freq = []
-    for i in range(len(data)):
+    for i, item in enumerate(data):
         if lower[i][0] == -1:
             freq.append(0)
         else:
@@ -131,7 +130,7 @@ class ThreadWithReturnValue(Thread):
     def __init__(self, group=None, target=None, name=None, args=(), kwargs={}, Verbose=None):
         """ Initializes the thread object. """
 
-        Thread.__init__ (self, group, target, name, args, kwargs)
+        Thread.__init__(self, group, target, name, args, kwargs)
         self._return = None
 
     def run(self):
@@ -139,10 +138,10 @@ class ThreadWithReturnValue(Thread):
         # If the target function is specified
         if self._target is not None:
             # Run the function
-            self._return = self._target (*self._args, **self._kwargs)
+            self._return = self._target(*self._args, **self._kwargs)
 
     def join(self, *args):
         """ Returns the value of target function running in the thread. """
 
-        Thread.join (self, *args)
+        Thread.join(self, *args)
         return self._return
