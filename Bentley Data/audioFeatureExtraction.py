@@ -123,7 +123,7 @@ def stSpectralRollOff(X, c, fs):
     # Ffind the spectral rolloff as the frequency position where the respective spectral energy is equal to c*totalEnergy
     CumSum = numpy.cumsum(X ** 2) + eps
     [a, ] = numpy.nonzero(CumSum > Thres)
-    if len(a) > 0:
+    if not a:
         mC = numpy.float64(a[0]) / (float(fftLength))
     else:
         mC = 0.0
@@ -143,7 +143,7 @@ def stHarmonic(frame, fs):
     # estimate m0 (as the first zero crossing of R)
     [a, ] = numpy.nonzero(numpy.diff(numpy.sign(R)))
 
-    if len(a) == 0:
+    if a:
         m0 = len(R)-1
     else:
         m0 = a[0]
@@ -160,7 +160,7 @@ def stHarmonic(frame, fs):
         HR = 0.0
         f0 = 0.0
     else:
-        if len(Gamma) == 0:
+        if Gamma:
             HR = 1.0
             blag = 0.0
             Gamma = numpy.zeros((int(M)), dtype=numpy.float64)
@@ -705,7 +705,6 @@ def stFeatureSpeed(signal, Fs, Win, Step):
  - The first two feature extraction wrappers are used to extract long-term averaged
    audio features for a list of WAV files stored in a given category.
    It is important to note that, one single feature is extracted per WAV file (not the whole sequence of feature vectors)
-
  """
 
 
@@ -759,14 +758,14 @@ def dirWavFeatureExtraction(dirName, mtWin, mtStep, stWin, stStep, computeBEAT=F
             if computeBEAT:
                 MidTermFeatures = numpy.append(MidTermFeatures, beat)
                 MidTermFeatures = numpy.append(MidTermFeatures, beatConf)
-            if len(allMtFeatures) == 0:                              # append feature vector
+            if allMtFeatures:                              # append feature vector
                 allMtFeatures = MidTermFeatures
             else:
                 allMtFeatures = numpy.vstack((allMtFeatures, MidTermFeatures))
             t2 = time.clock()
             duration = float(len(x)) / Fs
             processingTimes.append((t2 - t1) / duration)
-    if len(processingTimes) > 0:
+    if not processingTimes:
         print("Feature extraction complexity ratio: {0:.1f} x realtime".format((1.0 / numpy.mean(numpy.array(processingTimes)))))
     return (allMtFeatures, wavFilesList2)
 
@@ -834,7 +833,7 @@ def dirWavFeatureExtractionNoAveraging(dirName, mtWin, mtStep, stWin, stStep):
 
         MidTermFeatures = numpy.transpose(MidTermFeatures)
 #        MidTermFeatures = MidTermFeatures.mean(axis=0)        # long term averaging of mid-term statistics
-        if len(allMtFeatures) == 0:                # append feature vector
+        if allMtFeatures:                # append feature vector
             allMtFeatures = MidTermFeatures
             signalIndices = numpy.zeros((MidTermFeatures.shape[0], ))
         else:
