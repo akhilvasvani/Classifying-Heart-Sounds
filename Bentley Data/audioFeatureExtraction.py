@@ -59,8 +59,8 @@ def stEnergyEntropy(frame, numOfShortBlocks=10):
     return Entropy
 
 
-""" Frequency-domain audio features """
-
+#################################
+# Frequency-domain audio features
 
 def stSpectralCentroidAndSpread(X, fs):
     """Computes spectral centroid of frame (given abs(FFT))"""
@@ -180,7 +180,8 @@ def stHarmonic(frame, fs):
 
 def mfccInitFilterBanks(fs, nfft):
     """
-    Computes the triangular filterbank for MFCC computation (used in the stFeatureExtraction function before the stMFCC function call)
+    Computes the triangular filterbank for MFCC computation (used in the stFeatureExtraction function before the
+    stMFCC function call)
     This function is taken from the scikits.talkbox library (MIT Licence):
     https://pypi.python.org/pypi/scikits.talkbox
     """
@@ -213,9 +214,11 @@ def mfccInitFilterBanks(fs, nfft):
         cenTrFreq = freqs[i+1]
         highTrFreq = freqs[i+2]
 
-        lid = numpy.arange(numpy.floor(lowTrFreq * nfft / fs) + 1, numpy.floor(cenTrFreq * nfft / fs) + 1, dtype=numpy.int)
+        lid = numpy.arange(numpy.floor(lowTrFreq * nfft / fs) + 1, numpy.floor(cenTrFreq * nfft / fs) + 1,
+                           dtype=numpy.int)
         lslope = heights[i] / (cenTrFreq - lowTrFreq)
-        rid = numpy.arange(numpy.floor(cenTrFreq * nfft / fs) + 1, numpy.floor(highTrFreq * nfft / fs) + 1, dtype=numpy.int)
+        rid = numpy.arange(numpy.floor(cenTrFreq * nfft / fs) + 1, numpy.floor(highTrFreq * nfft / fs) + 1,
+                           dtype=numpy.int)
         rslope = heights[i] / (highTrFreq - cenTrFreq)
         fbank[i][lid] = lslope * (nfreqs[lid] - lowTrFreq)
         fbank[i][rid] = rslope * (highTrFreq - nfreqs[rid])
@@ -271,7 +274,7 @@ def stChromaFeatures(X, fs, nChroma, nFreqsPerChroma):
         C[nChroma] = spec
         C /= nFreqsPerChroma[nChroma]
     else:        
-        I = numpy.nonzero(nChroma>nChroma.shape[0])[0][0]        
+        I = numpy.nonzero(nChroma > nChroma.shape[0])[0][0]
         C = numpy.zeros((nChroma.shape[0],))
         C[nChroma[0:I-1]] = spec            
         C /= nFreqsPerChroma
@@ -393,6 +396,8 @@ def phormants(x, Fs):
     frqs = sorted(angz * (Fs / (2 * math.pi)))
 
     return frqs
+
+
 def beatExtraction(stFeatures, winSize, PLOT=False):
     """
     This function extracts an estimate of the beat rate for a musical signal.
@@ -410,8 +415,8 @@ def beatExtraction(stFeatures, winSize, PLOT=False):
     maxBeatTime = int(round(2.0 / winSize))
     HistAll = numpy.zeros((maxBeatTime,))
     for ii, i in enumerate(toWatch):                                        # for each feature
-        DifThres = 2.0 * (numpy.abs(stFeatures[i, 0:-1] - stFeatures[i, 1::])).mean()    # dif threshold (3 x Mean of Difs)
-        if DifThres<=0:
+        DifThres = 2.0 * (numpy.abs(stFeatures[i, 0:-1] - stFeatures[i, 1::])).mean()  # dif threshold (3 x Mean of Difs)
+        if DifThres <= 0:
             DifThres = 0.0000000000000001        
         [pos1, _] = utilities.peakdet(stFeatures[i, :], DifThres)           # detect local maxima
         posDifs = []                                                        # compute histograms of local maxima changes
@@ -519,8 +524,8 @@ def stSpectogram(signal, Fs, Win, Step, PLOT=False):
     return (specgram, TimeAxis, FreqAxis)
 
 
-""" Windowing and feature extraction """
-
+#####################################
+# Windowing and feature extraction
 
 def stFeatureExtraction(signal, Fs, Win, Step):
     """
@@ -552,7 +557,7 @@ def stFeatureExtraction(signal, Fs, Win, Step):
     countFrames = 0
     nFFT = Win / 2
 
-    [fbank, freqs] = mfccInitFilterBanks(Fs, nFFT)                # compute the triangular filter banks used in the mfcc calculation
+    [fbank, freqs] = mfccInitFilterBanks(Fs, nFFT)  # compute the triangular filter banks used in the mfcc calculation
     nChroma, nFreqsPerChroma = stChromaFeaturesInit(nFFT, Fs)
 
     numOfTimeSpectralFeatures = 8
@@ -586,16 +591,16 @@ def stFeatureExtraction(signal, Fs, Win, Step):
         curFV[numOfTimeSpectralFeatures + nceps: numOfTimeSpectralFeatures + nceps + numOfChromaFeatures - 1] = chromaF
         curFV[numOfTimeSpectralFeatures + nceps + numOfChromaFeatures - 1] = chromaF.std()
         stFeatures.append(curFV)
+
         # delta features
-        '''
-        if countFrames>1:
-            delta = curFV - prevFV
-            curFVFinal = numpy.concatenate((curFV, delta))            
-        else:
-            curFVFinal = numpy.concatenate((curFV, curFV))
-        prevFV = curFV
-        stFeatures.append(curFVFinal)        
-        '''
+        # if countFrames > 1:
+        #     delta = curFV - prevFV
+        #     curFVFinal = numpy.concatenate((curFV, delta))
+        # else:
+        #     curFVFinal = numpy.concatenate((curFV, curFV))
+        # prevFV = curFV
+        # stFeatures.append(curFVFinal)
+
         # end of delta
         Xprev = X.copy()
 
@@ -673,7 +678,7 @@ def stFeatureSpeed(signal, Fs, Win, Step):
     numOfTimeSpectralFeatures = 8
     numOfHarmonicFeatures = 1
     totalNumOfFeatures = numOfTimeSpectralFeatures + nceps + numOfHarmonicFeatures
-    #stFeatures = numpy.array([], dtype=numpy.float64)
+    # stFeatures = numpy.array([], dtype=numpy.float64)
     stFeatures = []
 
     while (curPos + Win - 1 < N):
@@ -699,13 +704,11 @@ def stFeatureSpeed(signal, Fs, Win, Step):
 #            print curFV[numOfTimeSpectralFeatures+nceps], curFV[numOfTimeSpectralFeatures+nceps+1]
     return numpy.array(stFeatures)
 
-
-""" Feature Extraction Wrappers
-
- - The first two feature extraction wrappers are used to extract long-term averaged
-   audio features for a list of WAV files stored in a given category.
-   It is important to note that, one single feature is extracted per WAV file (not the whole sequence of feature vectors)
- """
+################################
+# Feature Extraction Wrappers
+# - The first two feature extraction wrappers are used to extract long-term averaged
+# audio features for a list of WAV files stored in a given category.
+# It is important to note that, one single feature is extracted per WAV file (not the whole sequence of feature vectors)
 
 
 def dirWavFeatureExtraction(dirName, mtWin, mtStep, stWin, stStep, computeBEAT=False):
@@ -747,10 +750,12 @@ def dirWavFeatureExtraction(dirName, mtWin, mtStep, stWin, stStep, computeBEAT=F
             continue
         wavFilesList2.append(wavFile)
         if computeBEAT:                                          # mid-term feature extraction for current file
-            [MidTermFeatures, stFeatures] = mtFeatureExtraction(x, Fs, round(mtWin * Fs), round(mtStep * Fs), round(Fs * stWin), round(Fs * stStep))
+            [MidTermFeatures, stFeatures] = mtFeatureExtraction(x, Fs, round(mtWin * Fs), round(mtStep * Fs),
+                                                                round(Fs * stWin), round(Fs * stStep))
             [beat, beatConf] = beatExtraction(stFeatures, stStep)
         else:
-            [MidTermFeatures, _] = mtFeatureExtraction(x, Fs, round(mtWin * Fs), round(mtStep * Fs), round(Fs * stWin), round(Fs * stStep))
+            [MidTermFeatures, _] = mtFeatureExtraction(x, Fs, round(mtWin * Fs), round(mtStep * Fs), round(Fs * stWin),
+                                                       round(Fs * stStep))
 
         MidTermFeatures = numpy.transpose(MidTermFeatures)
         MidTermFeatures = MidTermFeatures.mean(axis=0)         # long term averaging of mid-term statistics
@@ -766,21 +771,23 @@ def dirWavFeatureExtraction(dirName, mtWin, mtStep, stWin, stStep, computeBEAT=F
             duration = float(len(x)) / Fs
             processingTimes.append((t2 - t1) / duration)
     if not processingTimes:
-        print("Feature extraction complexity ratio: {0:.1f} x realtime".format((1.0 / numpy.mean(numpy.array(processingTimes)))))
+        print("Feature extraction complexity ratio: {0:.1f} x realtime".format((1.0 /numpy.mean(numpy.array(processingTimes)))))
     return (allMtFeatures, wavFilesList2)
 
 
 def dirsWavFeatureExtraction(dirNames, mtWin, mtStep, stWin, stStep, computeBEAT=False):
-    '''
-    Same as dirWavFeatureExtraction, but instead of a single dir it takes a list of paths as input and returns a list of feature matrices.
+    """
+    Same as dirWavFeatureExtraction, but instead of a single dir it takes a list of paths as input and returns
+    a list of feature matrices.
     EXAMPLE:
     [features, classNames] =
            a.dirsWavFeatureExtraction(['audioData/classSegmentsRec/noise','audioData/classSegmentsRec/speech',
-                                       'audioData/classSegmentsRec/brush-teeth','audioData/classSegmentsRec/shower'], 1, 1, 0.02, 0.02);
+                                       'audioData/classSegmentsRec/brush-teeth','audioData/classSegmentsRec/shower'],
+                                       1, 1, 0.02, 0.02);
 
     It can be used during the training process of a classification model ,
-    in order to get feature matrices from various audio classes (each stored in a seperate path)
-    '''
+    in order to get feature matrices from various audio classes (each stored in a separate path)
+    """
 
     # feature extraction for each class:
     features = []
@@ -829,7 +836,8 @@ def dirWavFeatureExtractionNoAveraging(dirName, mtWin, mtStep, stWin, stStep):
             continue        
         
         x = audioBasicIO.stereo2mono(x)                          # convert stereo to mono
-        [MidTermFeatures, _] = mtFeatureExtraction(x, Fs, round(mtWin * Fs), round(mtStep * Fs), round(Fs * stWin), round(Fs * stStep))  # mid-term feature
+        [MidTermFeatures, _] = mtFeatureExtraction(x, Fs, round(mtWin * Fs), round(mtStep * Fs), round(Fs * stWin),
+                                                   round(Fs * stStep))  # mid-term feature
 
         MidTermFeatures = numpy.transpose(MidTermFeatures)
 #        MidTermFeatures = MidTermFeatures.mean(axis=0)        # long term averaging of mid-term statistics
@@ -847,8 +855,9 @@ def dirWavFeatureExtractionNoAveraging(dirName, mtWin, mtStep, stWin, stStep):
 # NO LONG-TERM AVERAGING is performed. Therefore, the output for each audio file is NOT A SINGLE FEATURE VECTOR
 # but a whole feature matrix.
 #
-# Also, another difference between the following two wrappers and the previous is that they NO LONG-TERM AVERAGING IS PERFORMED.
-# In other words, the WAV files in these functions are not used as uniform samples that need to be averaged but as sequences
+# Also, another difference between the following two wrappers and the previous is that they NO LONG-TERM AVERAGING
+# IS PERFORMED. In other words, the WAV files in these functions are not used as uniform samples that need
+# to be averaged but as sequences
 
 def mtFeatureExtractionToFile(fileName, midTermSize, midTermStep, shortTermSize, shortTermStep, outPutFile,
                               storeStFeatures=False, storeToCSV=False, PLOT=False):
@@ -861,7 +870,8 @@ def mtFeatureExtractionToFile(fileName, midTermSize, midTermStep, shortTermSize,
     [Fs, x] = audioBasicIO.readAudioFile(fileName)            # read the wav file
     x = audioBasicIO.stereo2mono(x)                           # convert to MONO if required
     if storeStFeatures:
-        [mtF, stF] = mtFeatureExtraction(x, Fs, round(Fs * midTermSize), round(Fs * midTermStep), round(Fs * shortTermSize), round(Fs * shortTermStep))
+        [mtF, stF] = mtFeatureExtraction(x, Fs, round(Fs * midTermSize), round(Fs * midTermStep),
+                                         round(Fs * shortTermSize), round(Fs * shortTermStep))
     else:
         [mtF, _] = mtFeatureExtraction(x, Fs, round(Fs*midTermSize), round(Fs * midTermStep), round(Fs * shortTermSize),
                                        round(Fs * shortTermStep))
@@ -892,4 +902,5 @@ def mtFeatureExtractionToFileDir(dirName, midTermSize, midTermStep, shortTermSiz
         filesToProcess.extend(glob.glob(files))
     for f in filesToProcess:
         outPath = f
-        mtFeatureExtractionToFile(f, midTermSize, midTermStep, shortTermSize, shortTermStep, outPath, storeStFeatures, storeToCSV, PLOT)
+        mtFeatureExtractionToFile(f, midTermSize, midTermStep, shortTermSize, shortTermStep, outPath, storeStFeatures,
+                                  storeToCSV, PLOT)
