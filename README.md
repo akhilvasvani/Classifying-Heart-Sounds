@@ -1,7 +1,7 @@
 # Classifying-Heart-Sounds
 
 # Purpose
-This project is about developing a Deep Learning algorithm to correctly identity and classify heart sounds (specific to heart valve problems) into either an abnormal or normal cateogories. If the heart sound is classified is abnormal, what type of abnormality is it?
+This project consists of developing a Deep Learning network to correctly identity and classify heart sounds (specific to heart valve problems) into either an abnormal or normal cateogories. If the heart sound is classified as abnormal, what type of abnormality is it?
 
 # Datasets
 
@@ -19,17 +19,37 @@ Python 3.6+
 
 TensorFlow 1.13+
 
+Keras 2.2.4+
+
+librosa
+
+scikit-learn
+
 
 # How to Run
 
-To start, we use the dataset provided by Peter Bentley and implement several ML algorithms---SVM, Naive Bayes, Linear Regression, and AdaBoost--- in an attempt to classiy the heart sounds. Provided are two datasets: A & B. Dataset A is collected from an iPhone app and Dataset B is collected from patients in a hospitial. Using both datasets, SVM performs the best and is the baseline any Deep Learning algorithm must beat.
-
-Next, using the dataset from U-Mich as well as others, developed four networks: a LSTM, a BiLSTM, a GRU, and a BiGRU network from the [paper](https://arxiv.org/pdf/1801.08322.pdf) to run and discover the accuracy. Compared with SVM, BiLSTM performs the best with an accuarcy of 98%.
+Inside the ``Bentley Data`` folder are the scripts for preprocessing the data, audio feature extraction, finding the features (using the ML algorithms---SVM, Naive Bayes, Linear Regression, and AdaBoost) to classify the heart sounds. Inside the ``models`` folder, which is inside the ``Bentley Data`` folder, are the Deep Learning networks---BiLSTM, LSTM, GRU, and BiGRU networks. To run any of the following scripts, 
+clone the repo, and run each script. No arguments necessary.
 
 # How it Works
 
-Using Mel-frequency cepstral coefficients [(MFCCs)](https://en.wikipedia.org/wiki/Mel-frequency_cepstrum), we transform all the normal and abnormal frequencies and then train the networks accordingly. Inside
-the ``Bentley Data`` folder is the script for preprocessing the data, finding the features (using the ML methods), and audio feature extraction. Inside the ``models`` folder are the deep learning networks. 
+To start, we use the dataset provided by Peter Bentley and implement several ML algorithms---SVM, Naive Bayes, Linear Regression, and AdaBoost--- in an attempt to classiy the heart sounds. Provided are two datasets of recorded heart sounds: A & B. Dataset A is collected from an iPhone app and Dataset B is collected from patients in a hospitial. 
+
+One of the features of the hearts sounds is the Mel-frequency cepstral coefficients [(MFCCs)](https://en.wikipedia.org/wiki/Mel-frequency_cepstrum), which is a representation of the short term power spectrum of a sound. Both the ML algorithms and Deep Learning methods learn to associate a specific MFCC with a category (in this case, abnormal or normal heartbeat). Using both datasets, SVM performs the best amongst the ML algorithms and is the baseline any Deep Learning network must beat.
+
+Next there are four Deep Learning networks: a LSTM, a BiLSTM, a GRU, and a BiGRU network adapted from the [paper](https://arxiv.org/pdf/1801.08322.pdf). These networks were primarily used because LSTMs and GRUs are both capable of learning long-term dependencies. In simple terms, these networks are able to connect previous information to the present task without consuming too much memory. Compared with SVM, BiLSTM performs the best with an accuarcy of 98%; however, I suspect that the models are overfitting the data.
+
+
+# Things to Potentially Improve
+
+1. Find more data
+
+2. Change the number of MFCCs (right now, I use 40 but is the correct number?)
+
+3. Fiddle with the number of units in the LSTM cell (I have 64 units for the first cell, and 32 for the next)
+
+4. Change the optimizer (I use Adam, but should I consider SGD?)
+
 
 # Helpful Links
 
@@ -51,8 +71,16 @@ the ``Bentley Data`` folder is the script for preprocessing the data, finding th
 
 [Recognizing Abnormal Heart Sounds Using Deep Learning](http://ceur-ws.org/Vol-1891/paper2.pdf)
 
-[Phonocardiographic Sensing using Deep Learning for Abnormal Heartbeat Detection](https://arxiv.org/pdf/1801.08322.pdf) this!
+[Phonocardiographic Sensing using Deep Learning for Abnormal Heartbeat Detection](https://arxiv.org/pdf/1801.08322.pdf)
 
 
 # Notes
+
 [Different spectrogram between audio_ops and tf.contrib.signal](https://stackoverflow.com/questions/53196156/different-spectrogram-between-audio-ops-and-tf-contrib-signal)
+
+
+
+# References
+
+Thank you [Vivek Karn](https://github.com/vivekkarn/classification-of-heart-sounds) for you initial repo, which helped give me an idea of how to start.
+Thank you [Vinaya Kumar](https://github.com/vinayakumarr/Kalasalingam) for your repo and various papers included.
