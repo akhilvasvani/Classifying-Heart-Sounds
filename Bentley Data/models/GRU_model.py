@@ -197,14 +197,13 @@ def run_model(x_train_data, y_train_data, x_val_data, y_val_data, x_test_data,
     model.add(Dense(3))
     model.add(BatchNormalization())
     model.add(Activation('softmax'))
-
-    # sgd = optimizers.SGD(lr=0.002, decay=0.0002/5)
     model.compile(loss='categorical_crossentropy', optimizer='adam',
                   metrics=['accuracy'])
     model.fit(x_train_data, y_train_data, batch_size=32, epochs=100,
               validation_data=(x_val_data, y_val_data))
     score = model.evaluate(x_test_data, y_test_data, batch_size=16)
     print("loss: {:3f} - acc: {:3f}".format(score[0], score[1]))
+
     model.summary()
     model.save("saved_trained_models/GRU_model.hdf5")
 
@@ -275,15 +274,9 @@ def main():
             raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT),
                                     os.path.join('results', 'GRU_predictions'))
 
-    write_to_csv (true_results_dict, output_file_path=filepath)
+    write_to_csv(true_results_dict, output_file_path=filepath)
 
 
 if __name__ == '__main__':
     main()
 
-# # evaluate using 10-fold cross validation
-# kfold = StratifiedKFold(y=y_train1, n_folds=5, shuffle=True, random_state=seed)
-# results = cross_val_score(model, X_train, y_train, cv=kfold)
-# print(results)
-# print("results mean")
-# print(results.mean())

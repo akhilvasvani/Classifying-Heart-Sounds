@@ -281,9 +281,3 @@ def main():
 if __name__ == '__main__':
     main()
 
-# # evaluate using 10-fold cross validation
-# kfold = StratifiedKFold(y=y_train1, n_folds=5, shuffle=True, random_state=seed)
-# results = cross_val_score(model, X_train, y_train, cv=kfold)
-# print(results)
-# print("results mean")
-# print(results.mean())
